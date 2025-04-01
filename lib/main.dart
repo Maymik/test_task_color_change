@@ -1,0 +1,62 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: HelloThereScreen(),
+      ),
+    );
+  }
+}
+
+class HelloThereScreen extends StatefulWidget {
+  const HelloThereScreen({super.key});
+
+  @override
+  _HelloThereScreenState createState() => _HelloThereScreenState();
+}
+
+class _HelloThereScreenState extends State<HelloThereScreen> {
+  Color _backgroundColor = Color.fromARGB(
+    255,
+    Random().nextInt(256),
+    Random().nextInt(256),
+    Random().nextInt(256),
+  );//Colors.white;
+
+  void _changeBackgroundColor() {
+    setState(() {
+      _backgroundColor = Color.fromARGB(
+        255,
+        Random().nextInt(256),
+        Random().nextInt(256),
+        Random().nextInt(256),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _changeBackgroundColor,
+      child: Container(
+        color: _backgroundColor,
+        child: Center(
+          child: Text(
+            'Hello there',
+            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+}
