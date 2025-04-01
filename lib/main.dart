@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: HelloThereScreen(),
       ),
@@ -22,24 +23,20 @@ class HelloThereScreen extends StatefulWidget {
   const HelloThereScreen({super.key});
 
   @override
-  _HelloThereScreenState createState() => _HelloThereScreenState();
+  HelloThereScreenState createState() => HelloThereScreenState();
 }
 
-class _HelloThereScreenState extends State<HelloThereScreen> {
-  Color _backgroundColor = Color.fromARGB(
-    255,
-    Random().nextInt(256),
-    Random().nextInt(256),
-    Random().nextInt(256),
-  );//Colors.white;
+class HelloThereScreenState extends State<HelloThereScreen> {
+  final Random _random = Random();
+  Color _backgroundColor = Colors.white;
 
   void _changeBackgroundColor() {
     setState(() {
       _backgroundColor = Color.fromARGB(
         255,
-        Random().nextInt(256),
-        Random().nextInt(256),
-        Random().nextInt(256),
+        _random.nextInt(256),
+        _random.nextInt(256),
+        _random.nextInt(256),
       );
     });
   }
