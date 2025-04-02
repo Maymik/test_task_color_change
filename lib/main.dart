@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,6 +43,24 @@ class HelloThereScreenState extends State<HelloThereScreen>
       begin: 0,
       end: pi,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
+    _loadSavedColor();
+  }
+
+  Future<void> _loadSavedColor() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final int? savedColor = prefs.getInt('background_color');
+
+    if (savedColor != null) {
+      setState(() {
+        _backgroundColor = Color(savedColor);
+      });
+    }
+  }
+
+  Future<void> _saveColor(Color color) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('background_color', color.toARGB32());
   }
 
   void _changeBackgroundColor() {
@@ -53,14 +72,16 @@ class HelloThereScreenState extends State<HelloThereScreen>
         _random.nextInt(256),
       );
     });
+
+    _saveColor(_backgroundColor);
   }
 
   String _colorToString(Color color) {
-    int a = color.a.floor();
-    int r = color.red;
-    int g = color.green;
-    int b = color.blue;
-    return "Color( a=$a, r=$r, g=$g, b=$b)";
+    int a = color.a.round();
+    int r = (color.r * 255).round();
+    int g = (color.g * 255).round();
+    int b = (color.b * 255).round();
+    return "alfa=$a, red=$r, green=$g, blue=$b";
   }
 
   void _animateText() {

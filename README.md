@@ -1,16 +1,11 @@
 # test_task_color_change
 
-A new Flutter project.
+A new Flutter project that changes color in a fun way.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+below are the list of features for this app
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Tap anywhere on the screen and you will see background color changed and a fun animation.
+- Forgot which was your last background color? We've got you covered! Colors are saved now between app sessions.
+- App is thoroughly tested using best practices.
