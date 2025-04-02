@@ -27,7 +27,7 @@ class HelloThereScreen extends StatefulWidget {
 
 class HelloThereScreenState extends State<HelloThereScreen>
     with SingleTickerProviderStateMixin {
-  static const String backgroundColorKey = 'background_color';
+  static const String _backgroundColorKey = 'background_color';
   final Random _random = Random();
   Color _backgroundColor = Colors.white;
   late AnimationController _controller;
@@ -50,7 +50,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
 
   Future<void> _loadSavedColor() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int? savedColor = prefs.getInt(backgroundColorKey);
+    final int? savedColor = prefs.getInt(_backgroundColorKey);
 
     if (savedColor != null) {
       setState(() {
@@ -61,7 +61,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
 
   Future<void> _saveColor(Color color) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(backgroundColorKey, color.toARGB32());
+    await prefs.setInt(_backgroundColorKey, color.toARGB32());
   }
 
   void _changeBackgroundColor() {
