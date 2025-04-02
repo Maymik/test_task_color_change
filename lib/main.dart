@@ -81,7 +81,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
     int r = (color.r * 255).round();
     int g = (color.g * 255).round();
     int b = (color.b * 255).round();
-    return "alfa=$a, red=$r, green=$g, blue=$b";
+    return "alpha=$a, red=$r, green=$g, blue=$b";
   }
 
   void _animateText() {
