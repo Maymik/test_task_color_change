@@ -27,6 +27,7 @@ class HelloThereScreen extends StatefulWidget {
 
 class HelloThereScreenState extends State<HelloThereScreen>
     with SingleTickerProviderStateMixin {
+  static const String backgroundColorKey = 'background_color';
   final Random _random = Random();
   Color _backgroundColor = Colors.white;
   late AnimationController _controller;
@@ -49,7 +50,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
 
   Future<void> _loadSavedColor() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int? savedColor = prefs.getInt('background_color');
+    final int? savedColor = prefs.getInt(backgroundColorKey);
 
     if (savedColor != null) {
       setState(() {
@@ -60,7 +61,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
 
   Future<void> _saveColor(Color color) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('background_color', color.toARGB32());
+    await prefs.setInt(backgroundColorKey, color.toARGB32());
   }
 
   void _changeBackgroundColor() {
@@ -78,9 +79,9 @@ class HelloThereScreenState extends State<HelloThereScreen>
 
   String _colorToString(Color color) {
     int a = color.a.round();
-    int r = (color.r * 255).round();
-    int g = (color.g * 255).round();
-    int b = (color.b * 255).round();
+    int r = (color.r * 255).floor();
+    int g = (color.g * 255).floor();
+    int b = (color.b * 255).floor();
     return "alpha=$a, red=$r, green=$g, blue=$b";
   }
 
@@ -90,6 +91,10 @@ class HelloThereScreenState extends State<HelloThereScreen>
     } else {
       _controller.forward();
     }
+  }
+
+  void _runActions() {
+    _animateText();
     _changeBackgroundColor();
     _colorToString(_backgroundColor);
   }
@@ -97,7 +102,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _animateText,
+      onTap: _runActions,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 500),
         color: _backgroundColor,
