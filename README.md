@@ -13,5 +13,3 @@ below are the list of features for this app
 ## Testing
 
 - Widget test 'Background color changes on tap'.
-
-[![Watch the video](https://drive.google.com/file/d/1JKlgOuTXhSu45KD1t-PHclk-HQI4UO7e/view?usp=sharing)]
