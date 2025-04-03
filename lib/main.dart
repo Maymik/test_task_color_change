@@ -3,28 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
+/// The main application widget.
+///
+/// This widget serves as the root of the Flutter application.
 class MyApp extends StatelessWidget {
+  /// Creates a [MyApp] widget.
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(body: HelloThereScreen()),
     );
   }
 }
 
+/// A stateful widget that displays a screen with interactive animations.
+///
+/// Tapping the screen changes the background color and triggers an animation.
+///
 class HelloThereScreen extends StatefulWidget {
+  /// Creates a [HelloThereScreen] widget.
   const HelloThereScreen({super.key});
 
   @override
   HelloThereScreenState createState() => HelloThereScreenState();
 }
 
+/// The state class for [HelloThereScreen].
+///
+/// Manages color changes, animations.
 class HelloThereScreenState extends State<HelloThereScreen>
     with SingleTickerProviderStateMixin {
   static const String _backgroundColorKey = 'background_color';
@@ -37,7 +49,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _animation = Tween<double>(
@@ -78,10 +90,10 @@ class HelloThereScreenState extends State<HelloThereScreen>
   }
 
   String _colorToString(Color color) {
-    int a = color.a.round();
-    int r = (color.r * 255).floor();
-    int g = (color.g * 255).floor();
-    int b = (color.b * 255).floor();
+    final int a = color.a.round();
+    final int r = (color.r * 255).floor();
+    final int g = (color.g * 255).floor();
+    final int b = (color.b * 255).floor();
     return "alpha=$a, red=$r, green=$g, blue=$b";
   }
 
@@ -104,7 +116,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
     return GestureDetector(
       onTap: _runActions,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         color: _backgroundColor,
         child: Stack(
           children: [
@@ -118,7 +130,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
                     child: child,
                   );
                 },
-                child: Text(
+                child: const Text(
                   'Hello there!',
                   style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
@@ -131,7 +143,7 @@ class HelloThereScreenState extends State<HelloThereScreen>
               child: Text(
                 'Color: ${_colorToString(_backgroundColor)}',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
